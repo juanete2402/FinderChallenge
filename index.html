@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="finderChallenge">
+<head>
+	<meta charset="UTF-8">
+	<title>Finder Challenge</title>
+	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"/>
+	<link rel="stylesheet" href="assets/css/awesomplete.css">
+	<link rel="stylesheet" href="assets/css/awesomplete.theme.css">
+	<link rel="stylesheet" href="assets/css/estilos.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+</head>
+<body ng-controller="Controlador">
+	
+	<!-- cabecera -->
+	<header class="cabecera">
+		<div class="esquema">
+			<div class="fila">
+				<!-- logo -->
+				<div class="col pc-25 jnt-middle">
+					<h1 class="cabecera__logo">
+						<a href="." title="Finder Challenge">Finder Challenge</a>
+					</h1>
+				</div>
+				<!-- /.logo -->
+
+				<!-- formulario -->
+				<div class="col pc-75 jnt-middle">
+					<form class="cabecera__formulario" ng-submit="filtroItem.title = buscaItem.title">
+						<input id="campo" type="text" class="txt" placeholder="Ingresar texto..." ng-model="buscaItem.title">
+						<input type="submit" value="Buscar" class="submit" disabled="disabled">
+						<a href="#" class="guardar-busqueda">Guardar búsqueda</a>
+					</form>
+				</div>
+				<!-- /.formulario -->
+			</div>
+		</div>
+	</header>
+	<!-- /.cabecera -->
+
+
+	<!-- contenido -->
+	<main class="contenido">
+		<div class="esquema">
+			<div class="fila">
+				<!-- sidebar -->
+				<div class="col movil-40 tablet-30 pc-20">
+					<section class="sidebar">
+
+						<!-- bloque sidebar -->
+						<article class="sidebar__bloque">
+							<h2 class="sidebar__titulo">Búsquedas Guardadas</h2>
+							<ul class="sidebar__lista busqueda">
+								<li>
+									<a href="#">terror puro</a>
+									<ul class="sidebar__opciones">
+										<li><a href="#">Editar</a></li>
+										<li>|</li>
+										<li><a href="#">Eliminar</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="#">search drama</a>
+									<ul class="sidebar__opciones">
+										<li><a href="#">Editar</a></li>
+										<li>|</li>
+										<li><a href="#">Eliminar</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="#">comedias en ingles</a>
+									<ul class="sidebar__opciones">
+										<li><a href="#">Editar</a></li>
+										<li>|</li>
+										<li><a href="#">Eliminar</a></li>
+									</ul>
+								</li>
+							</ul>
+						</article>
+						<!-- /.bloque sidebar -->
+						
+						<!-- bloque sidebar -->
+						<article class="sidebar__bloque">
+							<h2 class="sidebar__titulo">Categorías</h2>
+							<ul class="sidebar__lista">
+								<li><a href="#" class="activo">Todos</a></li>
+								<li><a href="#">Terror</a></li>
+								<li><a href="#">Comedia</a></li>
+								<li><a href="#">Drama</a></li>
+							</ul>
+						</article>
+						<!-- /.bloque sidebar -->
+
+						<!-- bloque sidebar -->
+						<article class="sidebar__bloque">
+							<h2 class="sidebar__titulo">Idioma</h2>
+							<ul class="sidebar__lista">
+								<li><a href="#" class="activo">Todos</a></li>
+								<li><a href="#">Inglés</a></li>
+								<li><a href="#">Español</a></li>
+								<li><a href="#">Portugués</a></li>
+							</ul>
+						</article>
+						<!-- /.bloque sidebar -->
+
+						<!-- bloque sidebar -->
+						<article class="sidebar__bloque">
+							<h2 class="sidebar__titulo">Publicación</h2>
+							<ul class="sidebar__lista">
+								<li><a href="#" class="activo">Todos</a></li>
+								<li><a href="#">Hoy</a></li>
+								<li><a href="#">Hace una semana</a></li>
+								<li><a href="#">Hace un mes</a></li>
+								<li><a href="#">Hace un año</a></li>
+							</ul>
+						</article>
+						<!-- /.bloque sidebar -->
+
+						<!-- bloque sidebar -->
+						<article class="sidebar__bloque">
+							<h2 class="sidebar__titulo">Presentación</h2>
+							<ul class="sidebar__lista">
+								<li><a href="#">Impreso</a></li>
+								<li><a href="#">Digital</a></li>
+								<li><a href="#" class="activo">Impreso y digital</a></li>
+							</ul>
+						</article>
+						<!-- /.bloque sidebar -->
+
+					</section>
+				</div>
+				<!-- /.sidebar -->
+
+				<!-- resultados -->
+				<div class="col movil-60 tablet-70 pc-80">
+					<section class="resultados">
+
+						<div class="fila">
+							<!-- item resultado -->
+							<div class="col tablet-50 pc-1-3" ng-repeat="libro in libros.data | filter:{'title': filtroItem.title}">
+								<article class="resultados__item">
+									<img src="{{libro.image}}" alt="" class="resultados__img">
+									<h2 class="resultados__titulo">{{libro.title}}</h2>
+									<p class="resultados__descripcion">{{libro.teaser}}</p>
+								</article>
+							</div>
+							<!-- /.item resultado -->
+
+						</div>
+
+						<!-- <div class="fila">
+							<div class="col">
+								<ul class="paginacion">
+									<li><a href="#">Anterior</a></li>
+									<li>|</li>
+									<li><a href="#">Siguiente</a></li>
+								</ul>
+							</div>
+						</div> -->
+
+					</section>
+				</div>
+				<!-- /.resultados -->
+			</div>
+		</div>
+	</main>
+	<!-- /.contenido -->
+
+	<script src="assets/js/libs/jquery-3.2.1.min.js"></script>
+	<script src="assets/js/libs/awesomplete.js"></script>
+	<script src="assets/js/libs/angular.min.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+</html>

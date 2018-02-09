@@ -1,0 +1,220 @@
+// Funciones para responsive
+jnt-hasta($size)
+  if $size in breakpoints
+    @media screen and (max-width: (breakpoints[$size] - 1))
+      {block}
+  else
+    @media screen and (max-width: $size)
+      {block}
+
+jnt-desde($size)
+  if $size in breakpoints
+    @media screen and (min-width: breakpoints[$size])
+      {block}
+  else
+    @media screen and (min-width: $size)
+      {block}
+
+jnt-desde-hasta($desde, $hasta)
+  if $desde in breakpoints and $hasta in breakpoints
+    @media screen and (min-width: breakpoints[$desde]) and (max-width: breakpoints[$hasta] - 1)
+      {block}
+  else if $desde in breakpoints and ($hasta in breakpoints==false)
+    @media screen and (min-width: breakpoints[$desde]) and (max-width: $hasta)
+      {block}
+  else if ($desde in breakpoints == false) and $hasta in breakpoints
+    @media screen and (min-width: $desde) and (max-width: breakpoints[$hasta] - 1)
+      {block}
+  else
+    @media screen and (min-width: $desde) and (max-width: $hasta)
+      {block}
+        
+
+// Funciones para fondos sombreados
+jnt-bg-shadow($tamano, $color)
+  box-shadow 0 0 0 $tamano $color inset
+
+
+// Función para imagenes de fondo
+jnt-bg-img($url, $position = center center)
+  background-size cover
+  background-repeat no-repeat
+  background-position $position
+  background-image url($url)
+    
+
+// Funciones para Centrar bloques
+jnt-block-center()
+    display block
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+jnt-block-center-v()
+  display block
+  position absolute
+  top 50%
+  transform translateY(-50%) 
+jnt-block-center-h()
+  display block
+  position absolute
+  left 50%
+  transform translateX(-50%) 
+    
+
+// Funciones para Menus
+// Menu Multinivel Horizontal
+  
+// Boton
+jnt-menu-responsive($desde = pc, $color = white)
+  position relative
+  display block
+  width 3.25em
+  height 3em
+  cursor pointer
+  margin 0 auto
+  float none
+  transition all 0.3s
+  > span
+    position absolute
+    top 50%
+    display block
+    width 100%
+    height 0.4em
+    background-color $color
+    transform translateY(-50%)
+  > span:before, > span:after
+    content ""
+    position absolute
+    width 100%
+    height 100%
+    background-color $color
+    transition all 0.3s
+  > span:before
+    transform translateY(-.9em)
+  > span:after
+    transform translateY(.9em)
+  &.active
+    transform rotate(45deg)
+  &.active > span:before
+    transform rotate(90deg)
+  &.active > span:after
+    transform rotate(90deg)
+  +jnt-desde($desde)
+    display none
+    
+// Menu
+jnt-menu($bg-menu-responsive, $desde = pc)
+  background $bg-menu-responsive
+  font-size 0
+  position fixed
+  top 0
+  left -80%
+  width 80%
+  height 100%
+  z-index 5
+  padding jnt--fz-inicial * 3 0
+  box-sizing border-box
+  overflow-y auto
+  li
+    font-size jnt--fz-inicial
+    margin 0
+    position relative
+    .arrow-2
+      display none
+    .arrow
+      color white
+      position absolute
+      top 0
+      right 0
+      background alpha(white, .2)
+      height 3.2em
+      width 3.2em
+      cursor pointer
+      transition .3s
+      i
+        position absolute
+        top 50%
+        left 50%
+        transform translate(-50%, -50%)
+      &:hover
+        background alpha(white, .4)
+    a
+      display block
+      width 100%
+      box-sizing border-box
+      transition .3s
+      +jnt-hasta($desde)
+        border-bottom 1px solid alpha(white, .2)
+        padding 1em 0 1em 2em
+        color white
+      &:hover
+        background alpha(white, .1)
+    ul
+      display none
+      background alpha(white, .1)
+      
+  +jnt-desde($desde)
+    background transparent
+    position static
+    font-size 0
+    width 100%
+    overflow-y hidden
+    padding 0
+    .arrow
+      display none
+    > li
+      display inline-block
+      vertical-align top
+    li
+      font-size jnt--fz-inicial
+      position static
+      a
+        display inline-block
+        vertical-align middle
+        box-sizing border-box
+        .arrow-2
+          font-size .5em
+          display inline-block
+          vertical-align middle
+          padding-left 1em
+          display none
+          box-sizing border-box
+        &:not(:last-child) .arrow-2
+          display inline
+        &:hover
+          background none
+      ul
+        display none !important
+        z-index 10
+        position absolute
+        width 180px
+        li
+          position relative
+          ul
+            position absolute
+            top 0
+            left 100%
+      &:hover > ul
+        display block !important
+        
+// Usar esta estructura para los estilos incluyendo el mixin que indique desde donde
+/*
++jnt-desde($param)
+  background transparent
+  >li
+    margin-right .25em
+    background #transparent
+    &:hover
+      background #272829
+      transition .3s
+  ul
+    li
+      background #2B79BC
+      &:hover
+        background #236197
+        transition .3s
+  a
+    padding .5em 1.5em
+    color white
+*/

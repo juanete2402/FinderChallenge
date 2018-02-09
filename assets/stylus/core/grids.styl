@@ -1,0 +1,33 @@
+// Filas
+.esquema
+	width 100%
+	max-width jnt-fila--ancho_max
+	margin 0 auto
+	padding-left (jnt-columa--separacion / 2)
+	padding-right (jnt-columa--separacion / 2)
+	box-sizing border-box
+.fila
+	box-sizing border-box
+	font-size 0
+	margin-right -(jnt-columa--separacion / 2)
+	margin-left -(jnt-columa--separacion / 2)
+	.col
+		font-size jnt--fz-inicial
+		display inline-block
+		vertical-align top
+		margin 0
+		width 100%
+		box-sizing border-box
+		padding-left (jnt-columa--separacion / 2)
+		padding-right (jnt-columa--separacion / 2)
+		
+// Generamos los breakpoints y grillas
+for size, screen-size in breakpoints
+	@media all and (min-width: screen-size)
+		for i in (1..20)
+			.{size}-{i*5},.fila .col.{size}-{i*5}
+				width (i*5)+"%"
+		for fraccion-nombre, fraccion in fracciones
+			for i in (1..fraccion)
+				.{size}-{i}-{fraccion},.fila .col.{size}-{i}-{fraccion}
+					width: (100% / fraccion) * i
